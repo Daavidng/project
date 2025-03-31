@@ -1,0 +1,35 @@
+Recording.
+
+Agenda:
+
+1. Previous action items
+- logsheet
+- problem statement + literature review (citation) on the gap
+- 5 question -> 5 answer
+- fix highlighted research ques and objective
+- add literature review 
+- research methodology (align with objective):
+	- anomaly detection
+	- framework (visualization)
+	- explain dataset (itself)
+	- SSL-FSRL, including the SSL, FS, RL
+	- evluation metrics
+
+2. Progress
+- Explanatory Data Analysis
+- Algorithm design and framework setup
+- Implementation of ETE DL CNN model workflow
+- Error Analysis
+
+3. Next step
+- More hyperparameter tuning
+- Self-supervised
+- Few shot learning
+
+Action items:
+- 
+
+
+
+
+

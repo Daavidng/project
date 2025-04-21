@@ -1,49 +1,24 @@
-System Architecture:
-- Distributed anomaly detection system utilizing edge devices and a centralized control unit
-- Edge Devices:
-    - Simulated via Docker containers
-    - Capture and perform local preprocessing on PCB solder paste images for real-time responsiveness
-- Central Control Unit:
-    - Aggregates preprocessed data from all edge devices
-    - Coordinates model training and adjustments using self-supervised, few-shot, and reinforcement learning
-- Goal: Create a scalable, adaptive framework for detecting manufacturing defects in an IIoT environment
 
-Data Preprocessing:
-- Feature Extraction
-- Normalize pixel values and reduce noise
-- Regions of interest (ROI)
-- Data augmentation / synthetic with rotations, scaling, flips, and zooms
 
-Model Development:
-- Self-Supervised Learning
-    - Uses autoencoders and contrastive learning to capture latent features
-- Few-Shot Learning
-    - Employs prototypical networks and meta-learning for defect classification with minimal labels
-    - Applies synthetic augmentation for training enhancement
-- Reinforcement Learning
-    - Implements an RL agent to dynamically adjust detection thresholds and parameters based on real-time feedback
+
+
+
+
+
+
 
 Integrated Pipeline:
 - Sequential training: self-supervised pre-training > few-shot fine-tuning > RL adjustments
 - Continuous feedback loop from edge devices to improve the model
 
-Experimental Setup and Evaluation:
-- Simulation of edge devices using Docker containers
-- Anomaly detection with both real and synthetic PCB defect examples
-- Performance metrics: f1 score, recall, runtime, confusion matrix, and classification report
-
 Technical Implementation:
 - Hyperparameter tuning for autoencoders, few-shot modules, and RL agent
-- Train test split
 - Container orchestration ensuring effective resource allocation and central coordination
 
 Results and Analysis:
 - Compare with traditional ML (SVM, decision trees) and DL (CNNs)
 - Evaluate adaptive behavior of the RL component with evolving defect patterns
 - Assess computational efficiency and system scalability
-
-Model Deployment:
-- docker ...
 
 
 

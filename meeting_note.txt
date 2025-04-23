@@ -2,29 +2,34 @@ Recording.
 
 Agenda:
 
-1. Previous action items
+Updates:
 - logsheet
 - problem statement + literature review (citation) on the gap
 - 5 question -> 5 answer
-- fix highlighted research ques and objective
+- fix highlighted research ques and objective (rephrase)
 - add literature review 
 - research methodology (align with objective):
-	- anomaly detection
-	- framework (visualization)
-	- explain dataset (itself)
-	- SSL-FSRL, including the SSL, FS, RL
-	- evluation metrics
-
-2. Progress
+	- Data Acquisition and Preprocessing: dataset / anomaly detection
+	- Model Design and Development: framework, high-level architecture, flowchart
+		- todo (in-depth SSL, FS, RL, edge devices/docker)
+	- Experimentation and deployment: system design, evluation metrics
 - Explanatory Data Analysis
-- Algorithm design and framework setup
-- Implementation of ETE DL CNN model workflow
-- Error Analysis
+- Implementation and Evaluation of traditional machine learning
 
-3. Next step
-- More hyperparameter tuning
-- Self-supervised
-- Few shot learning
+Upcoming:
+- research methodology (in-depth SSL, FS, RL, edge devices/docker)
+- include complete label (good, bad, spike, excess, poor)
+- image processing with region of interest (ROI)
+- hyperparameter tuning for ssl, few-shot modules, and RL agent
+- edge device (docker) Implementation
+- Container orchestration ensuring effective resource allocation and central coordination
+- Continuous feedback loop from edge devices to improve the model
+
+Results and Analysis:
+- Compare with traditional ML (SVM, decision trees) and DL (CNNs)
+- Evaluate adaptive behavior of the RL component with evolving defect patterns
+- Assess computational efficiency and system scalability
+
 
 Action items:
 - 

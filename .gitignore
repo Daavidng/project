@@ -1,6 +1,4 @@
 dataset/
+experiment/
 logsheet/
 model/
-*.h5
-experiment/
-test.py

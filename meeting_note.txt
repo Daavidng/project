@@ -1,0 +1,38 @@
+Recording.
+
+Updates:
+- logsheet
+- problem statement based on literature review (citation) on the gap
+- 7 question -> 7 answer
+- fix highlighted research ques and objective (rephrase)
+- migrated literature review, remove literature review in chapter 1?
+- research methodology (align with objective):
+	- Data Acquisition and Preprocessing: dataset / anomaly detection
+	- Model Design and Development: framework, high-level architecture, flowchart
+		- todo (in-depth SSL, FS, RL, edge devices/docker)
+	- Experimentation and deployment: system design, evluation metrics
+- Vscode
+	- EDA, traditional model, sslfsrf model
+
+Upcoming:
+- logsheet
+- research methodology (in-depth SSL, FS, RL, edge devices/docker)
+- include completeness of dataset labels (good, bad, spike, excess, poor)
+- image processing with region of interest (ROI)
+- hyperparameter tuning for ssl, few-shot modules, and RL agent
+- edge device (docker) implementation
+- container orchestration ensuring effective resource allocation and central coordination
+- capability to continuous feedback loop from edge devices to improve the model 
+
+Results Analysis:
+- compare with traditional ML (SVM, decision trees) and DL (CNNs)
+- evaluate adaptive behavior of the RL component with evolving defect patterns
+- assess computational efficiency and system scalability
+
+Action items:
+- 
+
+
+
+
+

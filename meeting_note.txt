@@ -1,6 +1,7 @@
 Recording.
 
 Updates:
+- methods + notebook review + implementation demo
 - detailed analysis on the dataset
 - include completeness of dataset labels (good, spike, excess, poor)
 - image processing with region of interest (ROI)
@@ -9,13 +10,15 @@ Updates:
 
 
 Upcoming:
-- continue to improve model accuracy
-- research methodology (in-depth SSL, FS, RL, edge devices/docker)
-- capability to continuous feedback loop from edge devices to improve the model 
+- capability to continuous feedback loop from edge devices to improve the model
+- application in webapp (upload image file) / in real-time camera (scanning)
+- write report research methodology & result analysis
 - result analysis
     - compare with conventional ML vs SSLFSRL
     - evaluate adaptive behavior of the RL component with evolving defect patterns
     - assess computational efficiency and system scalability
+
+- current challenge: continue to improve model accuracy
 
 
 Action items:

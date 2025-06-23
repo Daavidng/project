@@ -10,6 +10,7 @@ Updates:
 
 
 Upcoming:
+- continue to improve model accuracy
 - capability to continuous feedback loop from edge devices to improve the model
 - application in webapp (upload image file) / in real-time camera (scanning)
 - write report research methodology & result analysis
@@ -18,7 +19,6 @@ Upcoming:
     - evaluate adaptive behavior of the RL component with evolving defect patterns
     - assess computational efficiency and system scalability
 
-- current challenge: continue to improve model accuracy
 
 
 Action items:

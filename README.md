@@ -1,6 +1,6 @@
-# SELF-SUPERVISED FEW-SHOT REINFORCEMENT LEARNING FOR SCALABLE AND ADAPTIVE ANOMALY DETECTION IN EDGE-BASED INDUSTRIAL IOT SYSTEMS
+# Self-Supervised Few-Shot Reinforcement Learning for Scalable and Adaptive Anomaly Detection in Edge-Based Industrial IoT Systems
 
-## Quick Setup via Windows OS
+## Quick Setup via Window OS
 
 ### Step 1: Navigate to Project Directory
 

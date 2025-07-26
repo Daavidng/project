@@ -1,12 +1,7 @@
 Recording.
 
 Updates:
-- methods + notebook review + implementation demo
-- detailed analysis on the dataset
-- include completeness of dataset labels (good, spike, excess, poor)
-- image processing with region of interest (ROI)
-- fine tuning for ssl, few-shot modules, and RL agent
-- edge device (docker) implementation for effective resource allocation and central coordination
+-
 
 
 Upcoming:
@@ -20,8 +15,6 @@ Upcoming:
     - assess computational efficiency and system scalability
 
 
-
 Action items:
 - 
-
 

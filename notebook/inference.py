@@ -73,6 +73,7 @@ def main():
         with open(ARTIFACTS_PATH, 'rb') as f:
             model_artifacts = pickle.load(f)
         print("Model loaded successfully.")
+        print("testing")
     except Exception as e:
         print(f"Error loading model: {e}")
         return

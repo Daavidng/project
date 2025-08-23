@@ -2,3 +2,4 @@ tensorflow
 numpy
 opencv-python-headless
 scikit-learn
+pandas

@@ -11,7 +11,7 @@ cd c:\Users\david\Desktop\project
 ### Step 2: Build Docker Image - 1 time job
 
 ```
-docker build -t pcb-defect-classifier -f notebook/Dockerfile .
+docker build -t pcb-defect-classifier -f src/Dockerfile .
 ```
 
 ### Step 3: Run Docker Container
@@ -19,7 +19,7 @@ docker build -t pcb-defect-classifier -f notebook/Dockerfile .
 ```
 docker run --rm `
   -v c:\Users\david\Desktop\project\dataset:/app/dataset `
-  -v c:\Users\david\Desktop\project\notebook\inference.py:/app/inference.py `
+  -v c:\Users\david\Desktop\project\src\inference.py:/app/inference.py `
   -v c:\Users\david\Desktop\project\model:/app/model `
   pcb-defect-classifier /app/dataset/Labeled/YOUR_IMAGE.jpg
 ```
@@ -27,7 +27,7 @@ docker run --rm `
 ```
 docker run --rm `
   -v c:\Users\david\Desktop\project\dataset:/app/dataset `
-  -v c:\Users\david\Desktop\project\notebook\inference.py:/app/inference.py `
+  -v c:\Users\david\Desktop\project\src\inference.py:/app/inference.py `
   -v c:\Users\david\Desktop\project\model:/app/model `
   pcb-defect-classifier /app/dataset/Labeled/WIN_20220330_16_02_56_Pro.jpg
 ```

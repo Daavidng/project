@@ -16,7 +16,7 @@ ARTIFACTS_PATH = os.path.join(MODEL_DIR, "fsl_model_artifacts.pkl")
 def get_ssl_encoder(input_shape):
     """Recreate the same SSL encoder architecture from the notebook."""
     base_encoder = ResNet50(include_top=False, weights=None, input_shape=input_shape)
-    base_encoder.trainable = False  # inference mode
+    base_encoder.trainable = False
     return models.Sequential([
         base_encoder,
         layers.GlobalAveragePooling2D(),

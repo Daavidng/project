@@ -5,11 +5,11 @@ FROM python:3.9-slim
 WORKDIR /app
 
 # Copy the inference script and the model directory into the container
-COPY notebook/inference.py .
+COPY src/inference.py .
 COPY model ./model
 
 # Copy the requirements file into the container at /app
-COPY notebook/requirements.txt .
+COPY src/requirements.txt .
 
 # Install any needed packages specified in requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt

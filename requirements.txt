@@ -1,5 +1,6 @@
-tensorflow
+tensorflow-cpu
 numpy
 opencv-python-headless
 scikit-learn
 pandas
+psutil

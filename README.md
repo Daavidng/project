@@ -12,7 +12,7 @@ This project implements an intelligent PCB defect classification system that com
 
 ## Documentation
 
-- [`RESEARCH_SUMMARY.md`](RESEARCH_SUMMARY.md) - Technical approach and methodology
-- [`MODEL_BENCHMARKS.md`](MODEL_BENCHMARKS.md) - Model accuracy and training metrics
-- [`DEPLOYMENT_BENCHMARKS.md`](DEPLOYMENT_BENCHMARKS.md) - Performance analysis across devices
-- [`DEPLOYMENT_GUIDE.md`](DEPLOYMENT_GUIDE.md) - Detailed commands and deployment examples
+ - [`documentation/RESEARCH_SUMMARY.md`](documentation/RESEARCH_SUMMARY.md) - Technical approach and methodology
+ - [`documentation/MODEL_BENCHMARKS.md`](documentation/MODEL_BENCHMARKS.md) - Model accuracy and training metrics
+ - [`documentation/DEPLOYMENT_BENCHMARKS.md`](documentation/DEPLOYMENT_BENCHMARKS.md) - Performance analysis across devices
+ - [`documentation/DEPLOYMENT_GUIDE.md`](documentation/DEPLOYMENT_GUIDE.md) - Detailed commands and deployment examples

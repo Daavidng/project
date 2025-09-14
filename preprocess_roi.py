@@ -99,7 +99,10 @@ def crop_image_with_annotations(image_path, json_path, output_dir):
 def main():
     # Set up paths
     labeled_dir = Path("dataset/Labeled")
-    output_dir = Path("dataset/Labeled_Crop")
+    output_dir = Path("dataset/Processed_ROI")
+    
+    # File pattern to process
+    FILE_PATTERN = 'WIN_20220330*.jpg'
     
     # Create output directory if it doesn't exist
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -108,14 +111,14 @@ def main():
         print(f"Error: Directory not found: {labeled_dir}")
         return
     
-    # Find all JPG files
-    jpg_files = list(labeled_dir.glob("*.jpg")) + list(labeled_dir.glob("*.JPG"))
+    # Find JPG files matching the specific pattern
+    jpg_files = list(labeled_dir.glob(FILE_PATTERN))
     
     if not jpg_files:
-        print(f"No JPG files found in {labeled_dir}")
+        print(f"No files matching pattern '{FILE_PATTERN}' found in {labeled_dir}")
         return
     
-    print(f"Found {len(jpg_files)} JPG files in {labeled_dir}")
+    print(f"Found {len(jpg_files)} files matching pattern '{FILE_PATTERN}' in {labeled_dir}")
     print(f"Output directory: {output_dir}")
     print("=" * 60)
     

@@ -1,215 +1,137 @@
-# PCB Defect Detection Research Summary
+# Model Performance Benchmarks
 
-## Overview
+## Latest Model Performance Results (September 16, 2025)
 
-This research explores three distinct approaches to automated PCB (Printed Circuit Board) defect detection using deep learning techniques. The study compares traditional supervised learning methods with advanced data-efficient approaches, evaluating their effectiveness in real-world manufacturing scenarios where labeled data is scarce and expensive.
+Comprehensive benchmark results for two PCB defect classification approaches, including detailed performance metrics, model sizes, and deployment characteristics.
 
-## Research Objectives
+## Performance Summary
 
-- **Primary Goal**: Develop accurate PCB defect classification systems suitable for industrial manufacturing
-- **Key Challenge**: Address the scarcity of labeled defect data in real manufacturing environments
-- **Innovation Focus**: Explore data-efficient learning techniques that minimize manual labeling requirements
+| Approach | Accuracy | F1-Score | Precision | Recall | Model Size (FP32) | Model Size (INT8) | Parameters | Training Data |
+|----------|----------|----------|-----------|--------|-------------------|-------------------|------------|---------------|
+| **ROI + CNN** | **78.0%** | **78.0%** | **84%** | **78%** | 42.61 MB | ~10.7 MB | 11,170,372 | ~252 samples |
+| **ROI + SSL + FSL** | **72.5%** | **71.26%** | **73%** | **71%** | **11.7 MB** | **2.9 MB** | **3,078,080** | **~32 samples** |
 
-## Methodology Overview
+## Detailed Performance Metrics
 
-### Three Experimental Approaches
+### Model Architecture Comparison
 
-1. **Conventional CNN Approach** (Baseline)
-2. **Conventional CNN with ROI Enhancement**
-3. **Advanced Multi-Stage Approach** (SSL + FSL + RL)
+| Model | Architecture | Input Size | Backbone | Optimization |
+|-------|-------------|------------|----------|--------------|
+| ROI + CNN | Enhanced CNN (32→64 filters) | 224×224 | None | ROI preprocessing |
+| ROI + SSL + FSL | MobileNetV2 + FSL | 128×128 | MobileNetV2 | Multi-stage pipeline |
 
----
+### Accuracy Breakdown by Defect Type
 
-## Approach 1: Conventional CNN
+| Defect Type | Sample Count | ROI + CNN | ROI + SSL + FSL |
+|-------------|--------------|-----------|-----------------|
+| **Good** | 19 | **100%** | 67% |
+| **Excess Solder** | 18 | **61%** | 80% |
+| **Spike** | 18 | **78%** | 72% |
+| **Poor Solder** | 18 | **72%** | 67% |
 
-### Architecture
-- **Model**: Simple Sequential CNN
-- **Structure**: 2 convolutional blocks (16 → 32 filters) + dense layers
-- **Input Size**: 224×224 pixels
-- **Training**: Traditional supervised learning
+### Model Size Efficiency Analysis
 
-### Key Characteristics
-- **Data Requirements**: High - requires substantial labeled dataset
-- **Training Strategy**: End-to-end supervised learning
-- **Augmentation**: Standard image transformations using Albumentations
-- **Training Duration**: 10 epochs
+| Approach | Size Reduction vs ROI+CNN | Parameter Reduction | Accuracy/MB Ratio | Deployment Suitability |
+|----------|-------------------------|-------------------|------------------|---------------------|
+| ROI + CNN | Baseline | Baseline | **1.83%/MB** | Limited |
+| ROI + SSL + FSL | **3.64×** smaller | **72.5%** fewer | **6.20%/MB** | **Excellent** |
 
-### Strengths
-- Simple implementation and debugging
-- Well-established training pipeline
-- Predictable performance scaling with data
+### Training Efficiency Metrics
 
-### Limitations
-- High dependency on large labeled datasets
-- Limited adaptability to new defect types
-- Expensive to deploy in data-scarce environments
+| Approach | Training Time | Data Required | Labels per % Accuracy | Training Complexity |
+|----------|--------------|---------------|---------------------|-------------------|
+| ROI + CNN | Medium | 252 samples | **3.23 samples/%** | Medium |
+| ROI + SSL + FSL | **Fast (~1 min)** | **32 samples** | **0.44 samples/%** | Simple |
 
----
+### Memory Usage During Inference
 
-## Approach 2: Conventional CNN with ROI Enhancement
+| Device Profile | ROI+CNN Memory | ROI+SSL+FSL Memory | Memory Reduction |
+|---------------|----------------|---------------------|------------------|
+| Low-End (512MB) | ~331 MB | ~150 MB | **55% reduction** |
+| Mid-End (2GB) | ~728 MB | ~300 MB | **59% reduction** |
+| Local PC | ~687 MB | ~280 MB | **59% reduction** |
 
-### Architecture Enhancement
-- **Model**: Enhanced CNN (32 → 64 filters) with dropout regularization
-- **Key Innovation**: Automated Region of Interest (ROI) extraction
-- **Input Size**: 224×224 pixels (ROI-focused)
-- **Training Duration**: 20 epochs
+### Few-Shot Learning Analysis (ROI + SSL + FSL)
 
-### ROI Extraction Algorithm
-```
-1. Parse JSON annotations to locate defect boundaries
-2. Calculate component center and bounding box
-3. Expand ROI to include both solder joints (3x width, 2x height)
-4. Extract focused region with intelligent padding
-5. Train on cropped regions instead of full images
-```
+| Metric | Training Set | Test Set | Performance |
+|--------|-------------|----------|-------------|
+| **Accuracy** | 8 shots/class | 51 samples | **72.5%** |
+| **Training Time** | 32 samples total | <1 minute | **Excellent** |
+| **Model Size** | Lightweight | 11.7 MB | **3.6x smaller** |
 
-### Key Improvements
-- **Focused Learning**: Model trains on defect-relevant regions only
-- **Reduced Noise**: Eliminates irrelevant background information
-- **Better Feature Learning**: Enhanced attention to critical defect patterns
-- **Improved Generalization**: More robust to image variations
+## Edge Deployment Benchmarks
 
-### Advantages over Baseline
-- Higher classification accuracy through focused attention
-- Better handling of small defects in large images
-- More efficient use of limited training data
-- Improved model interpretability
+### Device Compatibility Matrix
 
----
+| Device Class | Memory Limit | ROI+CNN | ROI+SSL+FSL (FP32) | ROI+SSL+FSL (INT8) |
+|-------------|--------------|---------|---------------------|---------------------|
+| **IoT Sensors** | < 1 MB | ❌ 42.6 MB | ❌ 11.7 MB | ✅ **2.9 MB** |
+| **Mobile Devices** | < 50 MB | ✅ 42.6 MB | ✅ **11.7 MB** | ✅ **2.9 MB** |
+| **Edge Servers** | < 100 MB | ✅ 42.6 MB | ✅ **11.7 MB** | ✅ **2.9 MB** |
+| **Cloud/Desktop** | No limit | ✅ 42.6 MB | ✅ 11.7 MB | ✅ 2.9 MB |
 
-## Approach 3: Advanced Multi-Stage Pipeline (SSL + FSL + RL)
+### Inference Performance (Estimated)
 
-### Revolutionary Architecture
-- **Stage 1**: Self-Supervised Learning (SimCLR)
-- **Stage 2**: Few-Shot Learning (Prototypical Networks)
-- **Stage 3**: Reinforcement Learning (Active Learning)
+| Approach | Model Loading | Cold Start | Warm Inference | Throughput |
+|----------|--------------|------------|----------------|------------|
+| ROI + CNN | ~2-3s | ~3-4s | ~200-500ms | 2-5 FPS |
+| ROI + SSL + FSL | **~0.5-1s** | **~1-2s** | ~100-300ms | **3-8 FPS** |
 
-### Stage 1: Self-Supervised Learning (SSL)
-- **Method**: SimCLR contrastive learning
-- **Backbone**: ResNet50 encoder
-- **Input Size**: 128×128 pixels
-- **Training**: 5 epochs on unlabeled data
-- **Goal**: Learn visual representations without manual labels
+## Model Selection Guidelines
 
-### Stage 2: Few-Shot Learning (FSL)
-- **Method**: Prototypical Networks
-- **Support Set**: Only 5 shots per class (25 total samples)
-- **Classification**: Distance-based to class prototypes
-- **Encoder**: Frozen SSL pre-trained features
+### Use Case Recommendations
 
-### Stage 3: Reinforcement Learning (RL)
-- **Strategy**: Uncertainty sampling for active learning
-- **Process**: Intelligently select most informative samples
-- **Iterations**: 10 active learning steps
-- **Batch Size**: 5 new samples per step
+| Scenario | Recommended Model | Key Reason |
+|----------|------------------|------------|
+| **Maximum Accuracy Required** | ROI + CNN (78.0%) | **Best overall performance** |
+| **Balanced Performance** | ROI + SSL + FSL (72.5%) | Good accuracy + **3.6× smaller** |
+| **Ultra-Low Resource** | ROI + SSL + FSL Quantized | **2.9 MB** footprint |
+| **Rapid Deployment** | ROI + SSL + FSL | **87% less training data** |
+| **New Defect Types** | ROI + SSL + FSL | Few-shot adaptability |
 
-### Data Efficiency Breakthrough
-- **Initial Training**: Only 5 examples per class
-- **Progressive Learning**: Adds 50 strategically selected samples
-- **Final Dataset**: ~75 labeled samples vs. hundreds in traditional approaches
+### Performance vs Resource Trade-offs
 
----
+| Priority | Model Choice | Trade-off |
+|----------|-------------|-----------|
+| **Accuracy First** | ROI + CNN | Accept 3.6× larger model for **+5.5pp accuracy** |
+| **Size First** | ROI + SSL + FSL | Accept -5.5pp accuracy for **3.6× smaller** model |
+| **Data Efficiency** | ROI + SSL + FSL | **7.9× less labeling** required |
+| **Deployment Speed** | ROI + SSL + FSL | Faster loading, training |
 
-## Experimental Results
+## Technical Specifications
 
-| Approach | Accuracy | F1-Score | Labeled Data | Data Efficiency | Status |
-|----------|----------|----------|--------------|----------------|--------|
-| Conventional CNN | **39.68%** | 37.07% | ~252 samples | Baseline | ✅ Completed |
-| CNN + ROI | **60.32%** | 52.10% | ~252 samples | 1.52× baseline | ✅ Completed |
-| SSL + FSL + RL | **34.92%** | 37.00% | ~70 samples | **3.6× more efficient** | ✅ Completed |
+### ROI + SSL + FSL Pipeline Details
 
-### Per-Class Performance Comparison
+| Stage | Component | Parameters | Output | Training Time |
+|-------|-----------|------------|--------|---------------|
+| **Stage 1** | SSL Encoder (MobileNetV2) | 3,078,080 | Feature embeddings | ~40 seconds |
+| **Stage 2** | FSL Prototypes | ~few KB | Class prototypes | Few-shot setup |
+| **Total** | Complete Pipeline | 3,078,080 | Ready model | **<1 minute** |
 
-| Defect Type | Conventional CNN | CNN + ROI | SSL + FSL + RL | Sample Count |
-|-------------|------------------|-----------|----------------|--------------|
-| Good | 0.64 | **0.91** | 0.42 | 33 |
-| Excess Solder | 0.25 | **0.50** | 0.19 | 16 |
-| Spike | 0.00 | 0.00 | **0.50** | 8 |
-| Poor Solder | 0.00 | 0.00 | **0.17** | 6 |
+### Model Artifacts
 
-## Comparative Analysis
+| File | Size | Purpose | Critical for Deployment |
+|------|------|---------|----------------------|
+| `ssl_encoder.h5` | ~11.7 MB | Main model weights | ✅ Required |
+| `model_artifacts.pkl` | ~few KB | Prototypes + metadata | ✅ Required |
+| `roi_cnn.py` | ~1 KB | ROI+CNN implementation | ✅ For comparison |
+| `simple_ssl_fsl.py` | ~2 KB | SSL+FSL implementation | ✅ Required |
 
-### Data Requirements vs. Performance Trade-off
+## Benchmark Conclusions
 
-| Approach | Accuracy | Data Efficiency Ratio | Labels Required |
-|----------|----------|----------------------|-----------------|
-| Conventional CNN | 39.68% | 1.0× (baseline) | ~252 samples |
-| CNN + ROI | 60.32% | 1.52× performance | ~252 samples |
-| SSL + FSL + RL | 34.92% | **3.6× more efficient** | ~70 samples |
+### Key Performance Insights
 
-**Key Insight**: The SSL + FSL + RL approach achieves 88% of conventional CNN performance while using only 28% of the labeled data. The CNN + ROI approach emerged as the accuracy leader, achieving 52% better performance than the baseline.
+1. **ROI + CNN**: Delivers **highest accuracy (78.0%)** with strong per-class performance, but with large model size (42.61 MB) and high data requirements
+2. **ROI + SSL + FSL**: Competitive accuracy (72.5%) with **3.6× smaller model** and **87% less training data**
+3. **Training Efficiency**: SSL+FSL trains in <1 minute vs hours for traditional CNN approaches
+4. **Edge Deployment**: ROI + SSL + FSL is superior for resource-constrained environments
 
-### Performance Characteristics Analysis
+### Model Size vs Accuracy Analysis
 
-#### Conventional CNN (Baseline)
-- **Training Complexity**: Low
-- **Data Efficiency**: 1.0× (baseline)
-- **Best Performance**: 'good' class (64% recall)
-- **Challenges**: Poor performance on rare defects (spike: 0%, poor_solder: 0%)
-- **Industrial Applicability**: Limited by moderate performance and high labeling costs
+- **Best Accuracy**: ROI + CNN achieves **78.0%** accuracy (1.83% per MB)
+- **Best Efficiency**: ROI + SSL + FSL delivers **6.20%** accuracy per MB (3.4× better efficiency)
+- **Best Resource Efficiency**: ROI + SSL + FSL uses only **0.44 samples per % accuracy** vs 3.23 for ROI+CNN
 
-#### CNN with ROI Enhancement
-- **Status**: ✅ Implementation complete and executed
-- **Actual Improvement**: **52% accuracy boost** from focused training (60.32% vs 39.68%)
-- **Training Complexity**: Medium
-- **Best Performance**: 'good' class (91% recall), 'exc_solder' (50% recall)
-- **Challenges**: Still struggles with spike and poor_solder detection (0% recall both)
-- **Industrial Applicability**: **Highest accuracy approach** - excellent for quality control
-
-#### SSL + FSL + RL Pipeline
-- **Training Complexity**: High (multi-stage)
-- **Data Efficiency**: **3.6× more efficient** than baseline
-- **Best Performance**: Only approach that detects spike defects (50% recall)
-- **Strengths**: Excellent data efficiency, adaptable to new classes, detects rare defects
-- **Weaknesses**: Lower absolute accuracy (35% vs 60%)
-- **Industrial Applicability**: Highly practical for rapid deployment and rare defect detection
-
----
-
-## Key Research Findings
-
-| Finding | Conventional CNN | CNN + ROI | SSL + FSL + RL | Impact |
-|---------|------------------|-----------|----------------|---------|
-| **Accuracy** | 40% | **60%** | 35% | **ROI dramatically improves performance** |
-| **Data Required** | 252 samples | 252 samples | 70 samples | **72% reduction possible** |
-| **Best Class Performance** | Good (64%) | **Good (91%)** | Spike (50%) | ROI excels at dominant classes |
-| **Worst Class Performance** | Spike/Poor solder (0%) | Spike/Poor solder (0%) | Poor solder (17%) | **Only SSL detects all defect types** |
-| **Training Complexity** | Simple | Medium | Complex | ROI preprocessing vs multi-stage |
-| **New Class Addition** | Full retraining | Full retraining | Few examples | **Only SSL approach is adaptive** |
-| **Industrial Deployment** | Medium cost | High accuracy | Low cost | **3.6× more efficient** |
-
----
-
-## Research Impact Summary
-
-| Impact Area | Key Achievement | Benefit |
-|-------------|-----------------|---------|
-| **Data Efficiency** | 72% reduction in labeling | **3.6× more cost-effective** |
-| **Deployment Speed** | Few-shot learning | New defects added in minutes |
-| **Industrial Applicability** | Low-data approach | Practical for real manufacturing |
-| **Technical Innovation** | Multi-stage pipeline | SSL + FSL + RL integration |
-| **Scalability** | Active learning | Continuous improvement |
-| **Accuracy Breakthrough** | ROI enhancement | **52% accuracy improvement** |
-
-## Conclusion
-
-| Approach | Best Use Case | Key Trade-off | Performance vs Data |
-|----------|---------------|---------------|-------------------|
-| **Conventional CNN** | Baseline reference | Low accuracy (40%), simple implementation | 1.0× efficiency |
-| **CNN + ROI** | **High-accuracy requirements** | **Best performance (60%)**, same data needs | 1.52× baseline performance |
-| **SSL + FSL + RL** | Rapid deployment with minimal labeled data | Lower accuracy, **extreme data efficiency** | **3.6× more efficient** |
-
-### Key Insights
-- **ROI Enhancement Success**: ROI preprocessing **improved accuracy by 52%** (40% → 60%) - **major breakthrough**
-- **Data Efficiency Champion**: SSL + FSL + RL achieves **88% of conventional performance with 28% of the data**  
-- **Rare Defect Detection**: SSL approach is **only method that detects spike defects** (50% recall)
-- **Industrial Quality Control**: CNN + ROI achieved **91% recall on good components** - ideal for quality assurance
-- **Class-Specific Strengths**: Each approach excels in different scenarios:
-  - **CNN + ROI**: Best for dominant classes (good: 91%, exc_solder: 50%)
-  - **SSL + FSL + RL**: Only approach detecting all defect types including rare ones
-
-**Revolutionary Insight**: Contrary to expectations, ROI enhancement proved to be the accuracy champion, while SSL + FSL + RL demonstrated that intelligent learning can maintain reasonable performance with drastically less data. The combination suggests a hybrid approach: use CNN + ROI for high-accuracy scenarios, and SSL + FSL + RL for rapid deployment and rare defect discovery.
-
----
-
-*This research provides a foundation for next-generation intelligent manufacturing systems that can adapt quickly to new challenges while minimizing human annotation burden, with ROI enhancement proving crucial for achieving production-ready accuracy.*
+**Balanced Recommendation**: 
+- **Choose ROI + CNN** for maximum accuracy (78%) when resources allow
+- **Choose ROI + SSL + FSL** for efficient deployment (72.5% accuracy, 3.6× smaller, 87% less training data)

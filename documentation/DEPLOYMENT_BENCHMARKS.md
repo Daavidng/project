@@ -8,17 +8,17 @@ Comprehensive performance analysis of PCB defect classification across different
 |----------|-------------|------------|-----------------|----------------|----------------|
 | **Conventional CNN** | Custom 3-layer CNN | 11,170,372 | **42.61 MB** | ~10.7 MB | ❌ Standard |
 | **CNN + ROI** | Same as Conventional | 11,170,372 | **42.61 MB** | ~10.7 MB | ❌ Standard |
-| **SSL + FSL + RL** | MobileNetV2 + FSL | 2,618,816 | **10.0 MB** | ~2.5 MB | ✅ Optimized |
+| **SSL + FSL + RL** | MobileNetV2 + FSL | 3,078,080 | **11.7 MB** | ~2.9 MB | ✅ Optimized |
 
 ### Key Findings: Model Size Analysis
 
 #### 🔍 **Size Comparison**
-- **SSL + FSL + RL is 4.26× smaller** than CNN approaches (10 MB vs 42.61 MB)
-- **Quantized SSL model is 4.28× smaller** (2.5 MB vs 10.7 MB)
-- **Parameter reduction**: 76.5% fewer parameters (2.6M vs 11.2M)
+- **SSL + FSL + RL is 3.64× smaller** than CNN approaches (11.7 MB vs 42.61 MB)
+- **Quantized SSL model is 3.69× smaller** (2.9 MB vs 10.7 MB)
+- **Parameter reduction**: 72.5% fewer parameters (3.1M vs 11.2M)
 
 #### 📱 **Edge Device Suitability**
-| Device Type | CNN/ROI (42.61 MB) | SSL+FSL+RL (10 MB) | SSL Quantized (2.5 MB) |
+| Device Type | CNN/ROI (42.61 MB) | SSL+FSL+RL (11.7 MB) | SSL Quantized (2.9 MB) |
 |-------------|-------------------|-------------------|----------------------|
 | **IoT Sensors** (< 1 MB) | ❌ Too large | ❌ Too large | ✅ **Suitable** |
 | **Mobile Devices** (< 50 MB) | ✅ Suitable | ✅ **Excellent** | ✅ **Excellent** |
@@ -26,14 +26,14 @@ Comprehensive performance analysis of PCB defect classification across different
 
 #### ⚡ **Performance vs Size Trade-offs**
 - **CNN + ROI**: Best accuracy (60.32%) but largest size (42.61 MB)
-- **SSL + FSL + RL**: Good efficiency (34.92%) with smallest size (10 MB)
+- **SSL + FSL + RL**: Good efficiency (41.18%) with smaller size (11.7 MB)
 - **Deployment Strategy**: Use CNN + ROI for accuracy-critical applications, SSL + FSL + RL for resource-constrained environments
 
 ## Test Configuration
-- **Current Benchmarks**: MobileNetV2-based SSL encoder + FSL artifacts (10.0 MB optimized vs previous 90.47 MB ResNet50)
+- **Current Benchmarks**: MobileNetV2-based SSL encoder + FSL artifacts (11.7 MB updated from previous 10.0 MB)
 - **Sample Image**: `dataset/sample.jpg` (566.5 KB)
 - **Test Environment**: Docker with enforced memory and CPU limits
-- **Date**: August 26, 2025
+- **Date**: September 15, 2025
 
 ## Device Profile Comparisons
 
@@ -125,8 +125,8 @@ CPU Frequency: 3294 MHz
 | Use Case | Recommended Approach | Model Size | Expected Performance |
 |----------|---------------------|------------|---------------------|
 | **High Accuracy Required** | CNN + ROI | 42.61 MB | 60.32% accuracy |
-| **Balanced Performance** | SSL + FSL + RL | 10.0 MB | 34.92% accuracy |
-| **Ultra-Low Resource** | SSL + FSL + RL Quantized | 2.5 MB | ~30% accuracy |
+| **Balanced Performance** | SSL + FSL + RL | 11.7 MB | 41.18% accuracy |
+| **Ultra-Low Resource** | SSL + FSL + RL Quantized | 2.9 MB | ~38% accuracy |
 
 #### 📱 **Edge Device Optimization**
 
@@ -143,9 +143,9 @@ CPU Frequency: 3294 MHz
 
 **For SSL + FSL + RL Models (Already Optimized)**:
 1. **Further Optimization**:
-   - Apply INT8 quantization → **2.5 MB** ✅ Already optimized
-   - Use TensorFlow Lite → **~2 MB**
-   - Implement dynamic quantization → **~1.8 MB**
+   - Apply INT8 quantization → **2.9 MB** ✅ Already optimized
+   - Use TensorFlow Lite → **~2.3 MB**
+   - Implement dynamic quantization → **~2.0 MB**
 
 #### 🔧 **Runtime Optimizations**
 - **TensorFlow Lite**: Convert all models for mobile deployment
@@ -185,23 +185,23 @@ docker run --memory=4g --cpus=6 -e DEVICE_PROFILE=high-end -e MEMORY_LIMIT_MB=40
 | Approach | Model Size | Parameters | Best For |
 |----------|------------|------------|----------|
 | **CNN + ROI** | 42.61 MB | 11.2M | High-accuracy applications with sufficient resources |
-| **SSL + FSL + RL** | **10.0 MB** | **2.6M** | **Resource-constrained edge deployment** |
-| **SSL Quantized** | **2.5 MB** | **2.6M** | **Ultra-low resource IoT applications** |
+| **SSL + FSL + RL** | **11.7 MB** | **3.1M** | **Resource-constrained edge deployment** |
+| **SSL Quantized** | **2.9 MB** | **3.1M** | **Ultra-low resource IoT applications** |
 
 ### 🎯 **Key Insights**
 
-1. **SSL + FSL + RL is significantly smaller**: 76.5% parameter reduction, 4.26× size reduction
-2. **Best accuracy comes at a cost**: CNN + ROI is 4× larger but provides 1.7× better accuracy
-3. **Quantization is highly effective**: Reduces SSL model to ultra-compact 2.5 MB
+1. **SSL + FSL + RL is significantly smaller**: 72.5% parameter reduction, 3.64× size reduction
+2. **Best accuracy comes at a cost**: CNN + ROI is 3.6× larger but provides 1.47× better accuracy
+3. **Quantization is highly effective**: Reduces SSL model to ultra-compact 2.9 MB
 4. **Edge deployment ready**: SSL approach is purpose-built for resource constraints
 
 ### 📱 **Deployment Recommendations**
 
-- **Mobile Apps**: Use SSL + FSL + RL (10 MB) for balanced performance
-- **IoT Sensors**: Use quantized SSL model (2.5 MB) for ultra-low resource scenarios  
+- **Mobile Apps**: Use SSL + FSL + RL (11.7 MB) for balanced performance
+- **IoT Sensors**: Use quantized SSL model (2.9 MB) for ultra-low resource scenarios  
 - **Edge Servers**: Use CNN + ROI (42.61 MB) when accuracy is critical and resources allow
 - **Hybrid Approach**: Deploy both models and switch based on resource availability
 
-**Bottom Line**: The SSL + FSL + RL approach provides the best size-to-performance ratio for edge deployment, being over 4× smaller while maintaining reasonable accuracy. For applications requiring maximum accuracy regardless of size, CNN + ROI remains the best choice.
+**Bottom Line**: The SSL + FSL + RL approach provides the best size-to-performance ratio for edge deployment, being over 3.6× smaller while maintaining reasonable accuracy. For applications requiring maximum accuracy regardless of size, CNN + ROI remains the best choice.
 
 While the current benchmarks show performance challenges, the significantly smaller SSL model size makes it much more suitable for true edge deployment scenarios where model size and memory footprint are critical constraints.

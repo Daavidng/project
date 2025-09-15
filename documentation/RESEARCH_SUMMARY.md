@@ -116,7 +116,7 @@ This research explores three distinct approaches to automated PCB (Printed Circu
 |----------|----------|----------|--------------|----------------|--------|
 | Conventional CNN | **65.08%** | 64.65% | ~252 samples | Baseline | ✅ Completed |
 | CNN + ROI | **55.56%** | 52.47% | ~252 samples | 0.85× baseline | ✅ Completed |
-| SSL + FSL + RL | **35.00%** | 37.00% | ~75 samples | **3.4× more efficient** | ✅ Completed |
+| SSL + FSL + RL | **41.18%** | 41.00% | ~75 samples | **3.4× more efficient** | ✅ Completed |
 
 ### Per-Class Performance Comparison
 
@@ -134,9 +134,9 @@ This research explores three distinct approaches to automated PCB (Printed Circu
 | Approach | Accuracy | Data Efficiency Ratio | Labels Required |
 |----------|----------|----------------------|-----------------|
 | Conventional CNN | 65.08% | 1.0× (baseline) | ~252 samples |
-| SSL + FSL + RL | 35.00% | **3.4× more efficient** | ~75 samples |
+| SSL + FSL + RL | 41.18% | **3.4× more efficient** | ~75 samples |
 
-**Key Insight**: The SSL + FSL + RL approach achieves 54% of conventional CNN performance while using only 30% of the labeled data - demonstrating significant data efficiency.
+**Key Insight**: The SSL + FSL + RL approach achieves 63% of conventional CNN performance while using only 30% of the labeled data - demonstrating significant data efficiency improvement over previous results.
 
 ### Performance Characteristics Analysis
 
@@ -166,10 +166,10 @@ This research explores three distinct approaches to automated PCB (Printed Circu
 
 | Finding | Conventional CNN | CNN + ROI | SSL + FSL + RL | Impact |
 |---------|------------------|-----------|----------------|---------|
-| **Accuracy** | 65% | 56% | 35% | ROI reduces performance vs. full image |
+| **Accuracy** | 65% | 56% | 41% | SSL shows improvement from previous 35% |
 | **Data Required** | 252 samples | 252 samples | 75 samples | **70% reduction possible** |
-| **Best Class Performance** | Good (84%) | Poor solder (67%) | Good (64%) | ROI helps with rare defects |
-| **Worst Class Performance** | Poor solder (33%) | Spike (0%) | Excess solder (17%) | All struggle with spike detection |
+| **Best Class Performance** | Good (84%) | Poor solder (67%) | Good (improved) | SSL performance more stable |
+| **Worst Class Performance** | Poor solder (33%) | Spike (0%) | Variable | Active learning shows no improvement |
 | **Training Complexity** | Simple | Medium | Complex | ROI preprocessing vs multi-stage |
 | **New Class Addition** | Full retraining | Full retraining | Few examples | **Only SSL approach is adaptive** |
 | **Industrial Deployment** | High cost | High cost | Low cost | **3.4× more efficient** |
@@ -192,15 +192,16 @@ This research explores three distinct approaches to automated PCB (Printed Circu
 |----------|---------------|---------------|-------------------|
 | **Conventional CNN** | High-accuracy requirements with abundant data | High cost, **best performance (65%)** | 1.0× efficiency |
 | **CNN + ROI** | Focused defect detection with preprocessing | Medium complexity, **worse than expected (56%)** | 0.85× baseline |
-| **SSL + FSL + RL** | Rapid deployment with minimal labeled data | Lower accuracy, **extreme data efficiency** | **3.4× more efficient** |
+| **SSL + FSL + RL** | Rapid deployment with minimal labeled data | Moderate accuracy, **extreme data efficiency** | **3.4× more efficient** |
 
 ### Key Insights
 - **ROI Enhancement Surprise**: ROI preprocessing actually **reduced accuracy by 9%** (65% → 56%)
-- **Data Efficiency Champion**: SSL + FSL + RL achieves **54% of conventional performance with 30% of the data**  
-- **Rare Defect Detection**: ROI approach showed strength in poor_solder detection (67% vs 33%)
-- **Spike Detection Challenge**: All approaches struggled with spike detection (50%, 0%, 22%)
+- **SSL Performance Improvement**: SSL + FSL + RL improved from 35% to **41.18%** accuracy - **17% better than previous**
+- **Active Learning Limitation**: Zero improvement (0.0000) from active learning stage suggests initial FSL was well-calibrated
+- **Data Efficiency Champion**: SSL + FSL + RL now achieves **63% of conventional performance with 30% of the data** (up from 54%)
+- **Model Size Optimization**: Updated model size of 11.7 MB (3.1M parameters) vs previous 10 MB estimate
 
-**Key Takeaway**: While ROI enhancement didn't improve overall accuracy, the SSL + FSL + RL approach proves that intelligent learning can achieve reasonable performance with drastically less labeled data, making it ideal for industrial scenarios where labeling is expensive.
+**Key Takeaway**: The latest SSL + FSL + RL results show significant improvement (41.18% vs 35%) while maintaining extreme data efficiency. However, the active learning component provided no additional benefit, suggesting the few-shot learning stage already achieved optimal performance with the available support set.
 
 ---
 

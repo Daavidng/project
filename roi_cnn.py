@@ -76,7 +76,12 @@ CONFIG = {
         },
     }
 }
-os.makedirs(CONFIG['CACHE_DIR'], exist_ok=True)
+
+# Create cache directory with absolute path
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+CACHE_PATH = os.path.join(SCRIPT_DIR, CONFIG['CACHE_DIR'])
+os.makedirs(CACHE_PATH, exist_ok=True)
+print(f"Cache directory created at: {CACHE_PATH}")
 
 # ========== UTILITY FUNCTIONS ==========
 def focal_loss(gamma=2., alpha=0.25):
@@ -312,7 +317,7 @@ axes[1,1].legend()
 axes[1,1].grid(True, alpha=0.3)
 plt.suptitle('Training History', fontsize=16, fontweight='bold')
 plt.tight_layout()
-plt.savefig(os.path.join('cache', 'training_history.jpg'))
+plt.savefig(os.path.join(CACHE_PATH, 'training_history.jpg'))
 plt.close()
 
 # ========== MODEL EVALUATION & ANALYSIS ========== 
@@ -329,7 +334,7 @@ print(classification_report(y_true_classes, y_pred_classes, target_names=label_e
 cm = confusion_matrix(y_true_classes, y_pred_classes)
 class_names = label_encoder.classes_
 
-with open(os.path.join(CONFIG['CACHE_DIR'], 'classification_report.txt'), 'w') as f:
+with open(os.path.join(CACHE_PATH, 'classification_report.txt'), 'w') as f:
     f.write(classification_report(y_true_classes, y_pred_classes, target_names=label_encoder.classes_))
 
 print(f"\nCONFUSION MATRIX ANALYSIS:")
@@ -352,7 +357,7 @@ plt.title('Confusion Matrix with Counts and Percentages', fontsize=14, fontweigh
 plt.xlabel('Predicted Class', fontsize=12)
 plt.ylabel('True Class', fontsize=12)
 plt.tight_layout()
-plt.savefig(os.path.join(CONFIG['CACHE_DIR'], 'confusion_matrix.jpg'))
+plt.savefig(os.path.join(CACHE_PATH, 'confusion_matrix.jpg'))
 plt.close()
 
 print(f"\nSample images for each prediction combination:")
@@ -394,7 +399,7 @@ for i in range(len(class_names)):
 
 plt.suptitle('Confusion Matrix with Sample Images', fontsize=16, fontweight='bold')
 plt.tight_layout()
-plt.savefig(os.path.join(CONFIG['CACHE_DIR'], 'confusion_sample.jpg'))
+plt.savefig(os.path.join(CACHE_PATH, 'confusion_sample.jpg'))
 plt.close()
 macro_f1 = f1_score(y_true_classes, y_pred_classes, average='macro')
 print(f"\nFINAL RESULTS SUMMARY:")

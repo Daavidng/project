@@ -21,7 +21,6 @@ from sklearn.utils.class_weight import compute_class_weight
 from sklearn.utils import resample
 
 # TensorFlow / Keras
-import tensorflow as tf
 from tensorflow.keras import Sequential
 from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
 from tensorflow.keras.optimizers import Adam
@@ -107,6 +106,7 @@ def extract_label_from_filename(filename):
         if pattern in basename:
             return label
     return 'unknown'
+
 
 def load_and_preprocess_image(image_path):
     image = cv2.imread(image_path)

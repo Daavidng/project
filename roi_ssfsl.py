@@ -1,23 +1,22 @@
-# ========== SIMPLE SSL + FSL for PCB SOLDER DEFECT DETECTION ==========
-# Simplified Self-Supervised Learning + Few-Shot Learning
-# Fast CPU training (under 5 minutes) with good accuracy (70%+ target)
+# ========== IMPORTS ==========
 
+# Standard library
 import os
 import glob
 import warnings
+
+# Third-party libraries
 import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import cv2
-from collections import Counter
 import pickle
 
-# Machine learning
+# Scikit-learn
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report, confusion_matrix, f1_score, accuracy_score
 from sklearn.preprocessing import LabelEncoder
-from sklearn.utils import resample
 
 # TensorFlow
 import tensorflow as tf
@@ -26,17 +25,17 @@ from tensorflow.keras.applications import MobileNetV2
 
 warnings.filterwarnings('ignore')
 
-# ========== SIMPLE CONFIG ==========
+# ========== CONFIG ==========
 CONFIG = {
-    'IMG_HEIGHT': 128,  # Smaller for faster training
+    'IMG_HEIGHT': 128,
     'IMG_WIDTH': 128,
     'IMG_CHANNELS': 3,
     'NUM_CLASSES': 4,
     'DATASET_PATH': r'C:\Users\david\Desktop\project\dataset\Processed_ROI',
     'FILE_PATTERN': 'WIN_20220330*.jpg',
-    'BATCH_SIZE': 32,  # Larger batch for CPU efficiency
-    'SSL_EPOCHS': 15,  # Quick SSL training
-    'FSL_SHOTS': 8,    # Few shots per class
+    'BATCH_SIZE': 32,
+    'SSL_EPOCHS': 15,
+    'FSL_SHOTS': 8,
     'CACHE_DIR': 'cache',
 }
 
@@ -60,6 +59,7 @@ def extract_label_from_filename(filename):
         if pattern in basename:
             return label
     return 'unknown'
+
 
 def load_and_preprocess_image(image_path, target_size=(128, 128)):
     """Fast image loading and preprocessing"""
@@ -106,7 +106,7 @@ def create_simple_ssl_encoder():
         input_shape=(CONFIG['IMG_HEIGHT'], CONFIG['IMG_WIDTH'], 3),
         include_top=False, 
         weights='imagenet',
-        alpha=0.5  # Smaller model for speed
+        alpha=0.5,
     )
     
     # Freeze most layers for speed
@@ -119,7 +119,7 @@ def create_simple_ssl_encoder():
         layers.GlobalAveragePooling2D(),
         layers.Dense(128, activation='relu'),
         layers.Dropout(0.2),
-        layers.Dense(64),  # Final embedding
+        layers.Dense(64),
         layers.Lambda(lambda x: tf.nn.l2_normalize(x, axis=1))
     ], name="ssl_encoder")
     
@@ -512,31 +512,13 @@ def main():
     # Total time
     total_time = ssl_time + fsl_time
     print(f"\nTotal training time: {total_time:.1f} seconds ({total_time/60:.1f} minutes)")
-    
-    print("\n" + "="*60)
-    print("RESULTS SUMMARY")
-    print("="*60)
-    print(f"✓ Fast training: {total_time/60:.1f} minutes (target: <5 min)")
-    print(f"✓ Test accuracy: {accuracy:.1%} (target: >70%)")
-    print(f"✓ Macro F1-score: {f1:.4f}")
-    print(f"✓ Model size: Lightweight (MobileNetV2 + prototypes)")
-    print(f"✓ Focus: PCB solder shape detection (good, spike, exc_solder, poor_solder)")
-    
-    if accuracy >= 0.70:
-        print("🎯 TARGET ACHIEVED: Model meets accuracy requirement!")
-    else:
-        print("⚠️  Below target accuracy - consider tuning parameters")
-    
-    if total_time <= 300:  # 5 minutes
-        print("🚀 TARGET ACHIEVED: Training completed within time limit!")
-    else:
-        print("⏰ Training took longer than 5 minutes")
         
     print("="*60)
     
     return encoder, prototypes, label_encoder, accuracy
 
 if __name__ == "__main__":
-    # Run the complete pipeline
     encoder, prototypes, label_encoder, accuracy = main()
-    print("Simple SSL+FSL pipeline completed successfully!")
+
+# ========== END OF SCRIPT ==========
+print("Done")

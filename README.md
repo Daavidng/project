@@ -152,16 +152,31 @@ The SSL + FSL + RL approach represents a breakthrough in manufacturing AI:
 
 ---
 
-## 6. Bottom Line
+## 6. ROI Detection Models
+
+For users considering automated component detection as a pre-processing stage, here are recommended models with their trade-offs:
+
+| Model | Size | RAM Overhead | Inference Speed (Edge) | Best For |
+|-------|------|--------------|----------------------|----------|
+| **BlazeFace** | 0.6MB | ~50MB | 100+ FPS | **512MB edge devices** |
+| **YOLOv5n** | 1.9MB | ~150MB | 50-100 FPS | **Ultra-lightweight edge** |
+| **YOLOv4-MN3** | 25-40MB | ~400MB | 20-40 FPS | **Accuracy-focused** |
+| **YOLOv9c** | 51MB | ~600MB | 15-25 FPS | **Maximum precision** |
+
+---
+
+## 7. Bottom Line
 
 - **High accuracy + resources available** → ROI + CNN (78.0% Accuracy)
 - **Data efficiency + interactive learning** → ROI + SSL + FSL + RL (72.5% Accuracy, few sample data per class, lightweight, scalability)
 
 The ROI + SSL + FSL + RL approach enables rapid deployment with minimal labeled data while continuously improving through Q-Learning agent optimization - ideal for real-world manufacturing scenarios where labeled defect data is scarce, expensive, and new defect types emerge frequently.
 
+**YOLO Integration Note**: Users requiring automated multi-component detection may consider various ROI detection models as pre-processing: BlazeFace (+50MB, 512MB+ devices), YOLOv5n (+150MB), up to YOLOv9c (+600MB) depending on accuracy and resource requirements.
+
 ---
 
-## 7. References
+## 8. References
 
 1. Calabrese, M. (2024). **SolDef-AI: PCB Dataset for Defect Detection**. *Kaggle*. Available at: https://www.kaggle.com/datasets/mauriziocalabrese/soldef-ai-pcb-dataset-for-defect-detection/data
 

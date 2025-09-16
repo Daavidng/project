@@ -1,0 +1,14 @@
+2025-09-16 03:18:20,252 - INFO - Classification: exc_solder | Confidence: 0.259 | RL Action: defer | Reward: 3.000 | Epsilon: 0.298
+2025-09-16 03:19:19,386 - INFO - Classification: spike | Confidence: 0.259 | RL Action: ask | Reward: 3.000 | Epsilon: 0.297
+2025-09-16 03:19:33,524 - INFO - Classification: good | Confidence: 0.254 | RL Action: ask | Reward: 3.000 | Epsilon: 0.296
+2025-09-16 03:20:30,436 - INFO - Classification: spike | Confidence: 0.255 | RL Action: confident | Reward: 1.000 | Epsilon: 0.296
+2025-09-16 03:20:55,681 - INFO - Classification: exc_solder | Confidence: 0.257 | RL Action: defer | Reward: 3.000 | Epsilon: 0.294
+2025-09-16 03:21:14,693 - INFO - Classification: exc_solder | Confidence: 0.269 | RL Action: ask | Reward: 3.000 | Epsilon: 0.293
+2025-09-16 23:50:05,879 - INFO - Classification: exc_solder | Confidence: 0.215 | RL Action: ask | Reward: 3.000 | Epsilon: 0.291
+2025-09-16 23:50:41,262 - INFO - Classification: exc_solder | Confidence: 0.207 | RL Action: ask | Reward: 3.000 | Epsilon: 0.290
+2025-09-16 23:52:19,880 - INFO - Classification: exc_solder | Confidence: 0.177 | RL Action: ask | Reward: 3.000 | Epsilon: 0.288
+2025-09-16 23:52:21,055 - INFO - Classification: exc_solder | Confidence: 0.185 | RL Action: defer | Reward: 3.000 | Epsilon: 0.287
+2025-09-16 23:52:21,810 - INFO - Classification: exc_solder | Confidence: 0.302 | RL Action: ask | Reward: 3.000 | Epsilon: 0.285
+2025-09-16 23:52:22,096 - INFO - Classification: exc_solder | Confidence: 0.301 | RL Action: confident | Reward: 1.000 | Epsilon: 0.284
+2025-09-16 23:52:22,377 - INFO - Classification: exc_solder | Confidence: 0.304 | RL Action: defer | Reward: 3.000 | Epsilon: 0.282
+2025-09-16 23:52:50,802 - INFO - Classification: exc_solder | Confidence: 0.175 | RL Action: ask | Reward: 3.000 | Epsilon: 0.281

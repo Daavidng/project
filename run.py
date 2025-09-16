@@ -22,7 +22,6 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 os.environ['CUDA_VISIBLE_DEVICES'] = ''
 
 import tensorflow as tf
-from tensorflow.keras.applications import ResNet50
 from tensorflow.keras import models, layers
 
 # Configuration
@@ -269,7 +268,7 @@ class ResourceMonitor:
     def _get_device_profile(self):
         """Get device profile from environment or detect."""
         profile = os.environ.get('DEVICE_PROFILE', 'local').lower()
-        if profile not in ['local', 'low-end', 'mid-end', 'high-end']:
+        if profile not in ['local', 'low-end', 'mid-end', 'high-end', 'docker-edge']:
             profile = 'local'
         return profile
     
@@ -281,6 +280,12 @@ class ResourceMonitor:
                 'cpu_cores': int(os.environ.get('CPU_LIMIT', psutil.cpu_count() or 4)),
                 'target_inference_ms': 200,
                 'description': 'Local Development PC'
+            },
+            'docker-edge': {
+                'memory_mb': int(os.environ.get('MEMORY_LIMIT_MB', 512)),
+                'cpu_cores': int(os.environ.get('CPU_LIMIT', 2)),
+                'target_inference_ms': 500,
+                'description': 'Docker Edge Container'
             },
             'low-end': {
                 'memory_mb': int(os.environ.get('MEMORY_LIMIT_MB', 512)),

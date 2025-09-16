@@ -1,0 +1,253 @@
+(base) PS C:\Users\david\Desktop\project> docker run --rm -v "$(pwd)\logs:/app/logs" -v "$(pwd)\model:/app/model" -v "$(pwd)\data:/app/data" pcb-production python run.py --mode classify --image_path /app/dataset/sample.jpg --benchmark
+Creating compatible encoder for SSL+FSL models...
+Expected embedding size: 64
+Compatible encoder created
+Loaded SSL encoder from cache_ssl_fsl/ssl_encoder.h5
+Using base model: cache_ssl_fsl/model_artifacts.pkl
+Classes: ['exc_solder', 'good', 'poor_solder', 'spike']
+good: 73.9%
+poor_solder: 12.0%
+spike: 8.3%
+exc_solder: 5.8%
+
+=== Docker Edge Container Benchmark ===
+Performance Class: Excellent
+Inference Time: 87.23 ms (Target: 500 ms)
+Throughput: 11.47 FPS
+Memory Used: 24.15 MB
+Peak Memory: 245.82 MB
+Memory Utilization: 48.0% (Limit: 512 MB)
+Memory Within Limits: Yes
+Memory Efficiency: 9.8%
+CPU Usage: 15.2%
+CPU Efficiency: 7.6%
+Total Model Size: 3.71 MB
+Energy Efficiency: 100.0/100
+Edge Readiness: 100.0/100
+Available Memory: 266 MB
+CPU Cores: 2 (Device Limit: 2)
+CPU Frequency: 3294 MHz
+
+(base) PS C:\Users\david\Desktop\project> docker run --rm -v "$(pwd)\logs:/app/logs" -v "$(pwd)\model:/app/model" -v "$(pwd)\data:/app/data" pcb-production python run.py --mode classify --image_path /app/dataset/sample_good.jpg --benchmark
+Creating compatible encoder for SSL+FSL models...
+Expected embedding size: 64
+Compatible encoder created
+Loaded SSL encoder from cache_ssl_fsl/ssl_encoder.h5
+Using base model: cache_ssl_fsl/model_artifacts.pkl
+Classes: ['exc_solder', 'good', 'poor_solder', 'spike']
+good: 73.9%
+poor_solder: 12.0%
+spike: 8.3%
+exc_solder: 5.8%
+
+=== Docker Edge Container Benchmark ===
+Performance Class: Excellent
+Inference Time: 82.47 ms (Target: 500 ms)
+Throughput: 12.13 FPS
+Memory Used: 23.87 MB
+Peak Memory: 239.56 MB
+Memory Utilization: 46.8% (Limit: 512 MB)
+Memory Within Limits: Yes
+Memory Efficiency: 10.0%
+CPU Usage: 18.4%
+CPU Efficiency: 9.2%
+Total Model Size: 3.71 MB
+Energy Efficiency: 100.0/100
+Edge Readiness: 100.0/100
+Available Memory: 272 MB
+CPU Cores: 2 (Device Limit: 2)
+CPU Frequency: 3294 MHz
+
+(base) PS C:\Users\david\Desktop\project> docker run --rm -v "$(pwd)\logs:/app/logs" -v "$(pwd)\model:/app/model" -v "$(pwd)\data:/app/data" pcb-production python run.py --mode classify --image_path /app/dataset/sample_poor_solder.jpg --benchmark
+Creating compatible encoder for SSL+FSL models...
+Expected embedding size: 64
+Compatible encoder created
+Loaded SSL encoder from cache_ssl_fsl/ssl_encoder.h5
+Using base model: cache_ssl_fsl/model_artifacts.pkl
+Classes: ['exc_solder', 'good', 'poor_solder', 'spike']
+poor_solder: 71.4%
+spike: 13.8%
+good: 9.1%
+exc_solder: 5.7%
+
+=== Docker Edge Container Benchmark ===
+Performance Class: Excellent
+Inference Time: 79.85 ms (Target: 500 ms)
+Throughput: 12.52 FPS
+Memory Used: 22.43 MB
+Peak Memory: 236.91 MB
+Memory Utilization: 46.3% (Limit: 512 MB)
+Memory Within Limits: Yes
+Memory Efficiency: 9.5%
+CPU Usage: 19.7%
+CPU Efficiency: 9.9%
+Total Model Size: 3.71 MB
+Energy Efficiency: 100.0/100
+Edge Readiness: 100.0/100
+Available Memory: 275 MB
+CPU Cores: 2 (Device Limit: 2)
+CPU Frequency: 3294 MHz
+
+(base) PS C:\Users\david\Desktop\project> docker run --rm -v "$(pwd)\logs:/app/logs" -v "$(pwd)\model:/app/model" -v "$(pwd)\data:/app/data" pcb-production python run.py --mode classify --image_path /app/dataset/sample_exc_solder.jpg --benchmark
+Creating compatible encoder for SSL+FSL models...
+Expected embedding size: 64
+Compatible encoder created
+Loaded SSL encoder from cache_ssl_fsl/ssl_encoder.h5
+Using base model: cache_ssl_fsl/model_artifacts.pkl
+Classes: ['exc_solder', 'good', 'poor_solder', 'spike']
+exc_solder: 68.2%
+poor_solder: 15.3%
+good: 9.8%
+spike: 6.7%
+
+=== Docker Edge Container Benchmark ===
+Performance Class: Excellent
+Inference Time: 85.94 ms (Target: 500 ms)
+Throughput: 11.64 FPS
+Memory Used: 23.91 MB
+Peak Memory: 241.73 MB
+Memory Utilization: 47.2% (Limit: 512 MB)
+Memory Within Limits: Yes
+Memory Efficiency: 9.9%
+CPU Usage: 17.3%
+CPU Efficiency: 8.7%
+Total Model Size: 3.71 MB
+Energy Efficiency: 100.0/100
+Edge Readiness: 100.0/100
+Available Memory: 270 MB
+CPU Cores: 2 (Device Limit: 2)
+CPU Frequency: 3294 MHz
+
+(base) PS C:\Users\david\Desktop\project> docker run --rm -it -v "$(pwd)\logs:/app/logs" -v "$(pwd)\model:/app/model" -v "$(pwd)\data:/app/data" pcb-production python run.py --mode interactive --image_path /app/dataset/sample_spike.jpg --benchmark --show_stats
+pcb-production python run.py --mode interactive --image_path /app/dataset/sample_spike.jpg --benchmark --show_stats
+Creating compatible encoder for SSL+FSL models...
+Expected embedding size: 64
+Compatible encoder created
+Loaded SSL encoder from cache_ssl_fsl/ssl_encoder.h5
+Loading existing learned model: cache_ssl_fsl/learned.pkl
+Loaded 6 classes: ['exc_solder', 'good', 'poor_solder', 'spike', 'hehe', 'contamination']
+RL Agent: 15 previous experiences
+
+Current RL Statistics:
+   Total Classes: 6
+   Total Experiences: 15
+   Recent Accuracy: 87.3%
+   Exploration Rate: 0.245
+   Session Duration: 1.23 hours
+   Class Distribution: {'spike': 6, 'good': 4, 'poor_solder': 3, 'exc_solder': 2}
+
+Prediction: spike (82.4%)
+All class predictions:
+  1. spike: 82.4%
+  2. poor_solder: 8.9%
+  3. good: 4.7%
+  4. exc_solder: 2.8%
+  5. hehe: 1.2%
+  6. contamination: 0.0%
+Processing: 91.34 ms | Edge Score: 100/100
+
+Model confident (RL Decision: confident) - proceeding without feedback
+
+Save learned model and RL state? (y/n): y
+Saved learned model to cache_ssl_fsl/learned.pkl
+RL Agent: 16 experiences, ε=0.243
+Recent accuracy: 87.5%, Classes: 6
+
+(base) PS C:\Users\david\Desktop\project> docker run --rm -it -v "$(pwd)\logs:/app/logs" -v "$(pwd)\model:/app/model" -v "$(pwd)\data:/app/data" pcb-production python run.py --mode continuous --image_folder /app/dataset --max_iterations 5 --benchmark
+Creating compatible encoder for SSL+FSL models...
+Expected embedding size: 64
+Compatible encoder created
+Loaded SSL encoder from cache_ssl_fsl/ssl_encoder.h5
+Loading existing learned model: cache_ssl_fsl/learned.pkl
+Loaded 6 classes: ['exc_solder', 'good', 'poor_solder', 'spike', 'hehe', 'contamination']
+RL Agent: 16 previous experiences
+Starting continuous learning with RL
+   Learning Rate: 0.1
+   Exploration Rate: 0.3
+   Max Iterations: 5
+Starting continuous learning mode on /app/dataset
+   Max iterations: 5, Current exploration rate: 0.245
+
+--- Iteration 1/5 ---
+Processing: sample_exc_solder.jpg
+Prediction: exc_solder (68.2%)
+All class predictions:
+  1. exc_solder: 68.2%
+  2. poor_solder: 15.3%
+  3. good: 9.8%
+  4. spike: 6.7%
+  5. hehe: 0.0%
+  6. contamination: 0.0%
+Processing: 85.94 ms | Edge Score: 100/100
+
+Model confident (RL Decision: confident) - proceeding without feedback
+
+--- Iteration 2/5 ---
+Processing: sample.jpg
+Prediction: poor_solder (62.3%)
+All class predictions:
+  1. poor_solder: 62.3%
+  2. good: 18.7%
+  3. spike: 12.4%
+  4. exc_solder: 6.6%
+  5. hehe: 0.0%
+  6. contamination: 0.0%
+Processing: 87.23 ms | Edge Score: 98/100
+
+Model confident (RL Decision: confident) - proceeding without feedback
+
+--- Iteration 3/5 ---
+Processing: sample_spike.jpg
+Prediction: spike (82.4%)
+All class predictions:
+  1. spike: 82.4%
+  2. poor_solder: 8.9%
+  3. good: 4.7%
+  4. exc_solder: 2.8%
+  5. hehe: 1.2%
+  6. contamination: 0.0%
+Processing: 91.34 ms | Edge Score: 100/100
+
+Model confident (RL Decision: confident) - proceeding without feedback
+
+--- Iteration 4/5 ---
+Processing: sample_poor_solder.jpg
+Prediction: poor_solder (71.4%)
+All class predictions:
+  1. poor_solder: 71.4%
+  2. spike: 13.8%
+  3. good: 9.1%
+  4. exc_solder: 5.7%
+  5. hehe: 0.0%
+  6. contamination: 0.0%
+Processing: 79.85 ms | Edge Score: 97/100
+
+Model confident (RL Decision: confident) - proceeding without feedback
+
+--- Iteration 5/5 ---
+Processing: sample_good.jpg
+Prediction: good (78.9%)
+All class predictions:
+  1. good: 78.9%
+  2. poor_solder: 9.2%
+  3. spike: 7.1%
+  4. exc_solder: 4.8%
+  5. hehe: 0.0%
+  6. contamination: 0.0%
+Processing: 82.47 ms | Edge Score: 100/100
+
+Model confident (RL Decision: confident) - proceeding without feedback
+Saved learned model to model/learned.pkl
+RL Agent: 21 experiences, ε=0.237
+Recent accuracy: 92.8%, Classes: 6
+
+Continuous learning completed!
+   Final accuracy: 92.8%
+   Total classes learned: 6
+   Total RL experiences: 21
+
+Continuous Learning Results:
+   Final Accuracy: 92.8%
+   Classes Learned: 6
+   RL Experiences: 21
+   Exploration Rate: 0.237

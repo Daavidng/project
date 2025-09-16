@@ -1,0 +1,15 @@
+{
+  "total_classes": 6,
+  "total_experiences": 2,
+  "recent_accuracy": 1.0,
+  "exploration_rate": 0.2810744078639411,
+  "class_distribution": {
+    "exc_solder": 1
+  },
+  "session_duration_hours": 0.003030496666666667,
+  "rl_actions_taken": {
+    "feedback_request": 13,
+    "prototype_update": 8,
+    "new_class": 3
+  }
+}

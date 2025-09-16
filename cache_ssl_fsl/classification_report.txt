@@ -1,0 +1,14 @@
+Simple SSL+FSL Model Results
+Test Accuracy: 0.7647
+Macro F1-Score: 0.7381
+
+              precision    recall  f1-score   support
+
+  exc_solder       0.61      0.93      0.74        15
+        good       0.67      0.44      0.53         9
+ poor_solder       1.00      0.67      0.80         9
+       spike       0.94      0.83      0.88        18
+
+    accuracy                           0.76        51
+   macro avg       0.80      0.72      0.74        51
+weighted avg       0.80      0.76      0.76        51

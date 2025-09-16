@@ -1,0 +1,10 @@
+              precision    recall  f1-score   support
+
+  exc_solder       1.00      0.61      0.76        18
+        good       0.61      1.00      0.76        19
+ poor_solder       0.76      0.72      0.74        18
+       spike       1.00      0.78      0.88        18
+
+    accuracy                           0.78        73
+   macro avg       0.84      0.78      0.78        73
+weighted avg       0.84      0.78      0.78        73

@@ -158,3 +158,11 @@ The SSL + FSL + RL approach represents a breakthrough in manufacturing AI:
 - **Data efficiency + interactive learning** → ROI + SSL + FSL + RL (72.5% Accuracy, few sample data per class, lightweight, scalability)
 
 The ROI + SSL + FSL + RL approach enables rapid deployment with minimal labeled data while continuously improving through Q-Learning agent optimization - ideal for real-world manufacturing scenarios where labeled defect data is scarce, expensive, and new defect types emerge frequently.
+
+---
+
+## 7. References
+
+1. Calabrese, M. (2024). **SolDef-AI: PCB Dataset for Defect Detection**. *Kaggle*. Available at: https://www.kaggle.com/datasets/mauriziocalabrese/soldef-ai-pcb-dataset-for-defect-detection/data
+
+2. Calabrese, M., et al. (2024). **Artificial Intelligence Techniques for PCB Defect Detection: A Survey**. *Machines*, 8(3), 117. https://doi.org/10.3390/machines8030117. Available at: https://www.mdpi.com/2504-4494/8/3/117

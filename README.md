@@ -1,4 +1,4 @@
-# PCB Solder Defect Classification
+# PCB Solder Defect Classification with SSL + FSL + RL
 
 **Version Date**: September 16, 2025
 

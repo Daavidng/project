@@ -26,16 +26,16 @@ from tensorflow.keras import models, layers
 
 # Configuration
 TARGET_SIZE = (128, 128)
-SSL_ENCODER_PATH = "cache_ssl_fsl/ssl_encoder.h5"
-ARTIFACTS_PATH = "cache_ssl_fsl/model_artifacts.pkl"
-LEARNED_PATH = "cache_ssl_fsl/learned.pkl"
+SSL_ENCODER_PATH = "cache/cache_ssl_fsl/ssl_encoder.h5"
+ARTIFACTS_PATH = "cache/cache_ssl_fsl/model_artifacts.pkl"
+LEARNED_PATH = "cache/cache_ssl_fsl/learned.pkl"
 
 # RL Configuration
-RL_STATE_PATH = "cache_ssl_fsl/rl_state.pkl"
-RL_LOG_PATH = "cache_ssl_fsl/rl_learning.json"
+RL_STATE_PATH = "cache/cache_ssl_fsl/rl_state.pkl"
+RL_LOG_PATH = "cache/cache_ssl_fsl/rl_learning.json"
 
 # Create necessary directories
-os.makedirs("cache_ssl_fsl", exist_ok=True)
+os.makedirs("cache/cache_ssl_fsl", exist_ok=True)
 
 class AdaptiveRLAgent:
     """
